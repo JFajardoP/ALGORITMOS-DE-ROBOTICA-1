@@ -1,0 +1,39 @@
+#Punto 3 Sección B
+import math
+print("----> Punto 3 Sección B")
+
+print("--- Calculadora de Volúmenes ---")
+print("1. Prisma (base rectangular)\n2. Pirámide\n3. Cono truncado\n4. Cilindro")
+opcion = input("Seleccione el sólido (1-4): ")
+
+match opcion:
+    case "1":
+        largo_prisma = float (input("Largo: "))    
+        ancho_prisma = float (input("Ancho: "))
+        alto_prismq = float(input("Altura: "))
+        vol = largo_prisma * ancho_prisma * alto_prismq 
+        nombre_solido = "Prisma"
+    case "2":
+        lado_piramide = float(input("lado de la base de la piramide: "))
+        alto_piramide = float(input("Altura de la pirámide: "))
+        area_Piramide = lado_piramide ** 2
+        vol = (area_Piramide * alto_piramide) / 3
+        nombre_solido = "Pirámide"
+    case "3":
+        radio_mayor = float(input("Radio mayor: "))
+        radio_menor = float(input("Radio menor: "))
+        altura_cono = float(input("Altura: "))
+        vol = (1/3) * math.pi * altura_cono * (radio_mayor**2 + radio_menor**2 + radio_mayor*radio_menor)
+        nombre_solido = "Cono truncado"
+    case "4":
+        radio_cilindro = float(input("Radio: "))
+        altura_cilindro = float(input("Altura: "))
+        vol = math.pi * (radio_cilindro**2) * altura_cilindro
+        nombre_solido = "Cilindro"
+    case _:
+        vol = None
+        print("Opción no válida")
+
+if vol is not None:
+    print(f"El volumen del {nombre_solido} es: {vol:.4f}")
+print("-" * 30)

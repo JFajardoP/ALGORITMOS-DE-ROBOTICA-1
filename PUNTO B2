@@ -1,0 +1,15 @@
+#Punto 2 Seccion B
+print("----> Punto 2 Sección B")
+
+import random
+
+print("--- Generador de Números Aleatorios ---")
+cantidad = int(input("¿Cuántos números desea generar?: "))
+rango_inferior = int(input("Ingrese el límite inferior del rango: "))
+rango_superior = int(input("Ingrese el límite superior del rango: "))
+
+print(f"Generando {cantidad} números:")
+for _ in range(cantidad):
+    numero = random.randint(rango_inferior, rango_superior)
+    print(f"-> {numero}")
+print("-" * 30)

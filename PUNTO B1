@@ -1,0 +1,10 @@
+#punto 1 seccion B
+print("----> Punto 1 Sección B")
+print("--- Cálculo de Potencia Eléctrica ---")
+v = float(input("Ingrese el voltaje (V): "))
+i = float(input("Ingrese la corriente (A): "))
+
+potencia = v * i
+
+print(f"La potencia consumida es: {potencia:.2f} Watts")
+print("-" * 30)

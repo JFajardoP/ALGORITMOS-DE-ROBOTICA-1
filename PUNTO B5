@@ -1,0 +1,14 @@
+#Punto 5 Sección B
+print("----> Punto 5 Sección B")
+respuesta = ""
+
+# El bucle seguirá mientras la respuesta sea distinta de "No"
+while respuesta != "No":
+    respuesta = input("¿Desea continuar Si/No?: ")
+    
+    # Opcional: validación para ignorar mayúsculas/minúsculas
+    if respuesta.lower() == "no":
+        respuesta = "No"
+
+print("Programa finalizado.")
+print("-" * 30)

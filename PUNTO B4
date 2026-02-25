@@ -1,0 +1,15 @@
+#Punto 4 Sección B
+print("----> Punto 4 Sección B")
+print("--- Configuración de Robots ---")
+print("A. Cilíndrico\nB. Cartesiano\nC. Esférico")
+seleccion = input("Escoja una opción (A, B o C): ").upper()
+
+if seleccion == "A":
+    print("Robot Cilíndrico: Posee 3 articulaciones (1 Rotacional, 2 Prismáticas) -> RPP")
+elif seleccion == "B":
+    print("Robot Cartesiano: Posee 3 articulaciones (3 Prismáticas) -> PPP")
+elif seleccion == "C":
+    print("Robot Esférico: Posee 3 articulaciones (2 Rotacionales, 1 Prismática) -> RRP")
+else:
+    print("Selección no válida.")
+print("-" * 30) 
