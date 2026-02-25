@@ -7,8 +7,16 @@ vector2 = np.array([4, 5, 6])
 
 # Método 1: np.dot
 resultado1 = np.dot(vector1, vector2    )  # (7*4) + (8*5) + (3*6) = 28 + 40 + 18 = 86
+resultado2 = np.cross(vector1, vector2)  # Producto cruz
+resultado3 = vector1 + vector2  # Suma de vectores
+resultado4 = vector1 - vector2  # Resta de vectores
+resultado5 = np.divide(vector1, vector2)  # División elemento a elemento
 print("-" * 30)
 print("Producto punto de los vectores:", resultado1)
+print("Producto cruz de los vectores:", resultado2) 
+print("Suma de los vectores:", resultado3)
+print("Resta de los vectores:", resultado4) 
+print("División elemento a elemento:", resultado5)
 print("-" * 30)
 #Segundo punto seccion A
 import numpy as np
@@ -192,3 +200,4 @@ print(f"Fuerza de Avance:   {f_av:.2f} N ({kgf_av:.2f} kgf)")
 print(f"Fuerza de Retroceso: {f_re:.2f} N ({kgf_re:.2f} kgf)")
 
 print("-" * 30)
+
