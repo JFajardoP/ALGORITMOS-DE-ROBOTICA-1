@@ -1,0 +1,37 @@
+#PUNTO 3 SECCION C
+import numpy as np
+import matplotlib.pyplot as plt
+
+print("--- PUNTO C3: Carga y Descarga Circuito RC ---")
+
+# 1. Entrada de datos por teclado
+v = float(input("Ingrese el Voltaje de la fuente (V): "))
+r = float(input("Ingrese la Resistencia (Ω): "))
+c_uF = float(input("Ingrese la Capacitancia (µF): "))
+
+# 2. Cálculos físicos
+# Convertimos µF a Faradios multiplicando por 10^-6
+tau = r * (c_uF * 1e-6) 
+
+# Definimos el tiempo de la gráfica (5 veces tau es el tiempo de carga completa)
+t = np.linspace(0, 5 * tau, 1000)
+
+# 3. Ecuaciones de carga y descarga
+v_carga = v * (1 - np.exp(-t/tau))
+v_descarga = v * np.exp(-t/tau)
+
+# 4. Configuración de la gráfica
+plt.figure(figsize=(10, 6))
+plt.plot(t, v_carga, 'b-', label="Curva de Carga", linewidth=2)
+plt.plot(t, v_descarga, 'r--', label="Curva de Descarga", linewidth=2)
+
+# Añadimos detalles estéticos
+plt.title(f"Comportamiento Circuito RC\n(Constante de tiempo Tau = {tau:.4f}s)", fontsize=12)
+plt.xlabel("Tiempo (segundos)")
+plt.ylabel("Voltaje en el Condensador (V)")
+plt.axvline(x=tau, color='gray', linestyle=':', label='1 Tau (63.2% / 36.8%)')
+plt.legend()
+plt.grid(True, linestyle='--', alpha=0.7)
+
+# Mostrar la ventana
+plt.show()

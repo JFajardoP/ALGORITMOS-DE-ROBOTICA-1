@@ -1,0 +1,16 @@
+#PUNTO 2 SECCION C  
+import numpy as np
+import matplotlib.pyplot as plt
+from mpl_toolkits.mplot3d import Axes3D
+
+x = float(input("Coordenada X: "))
+y = float(input("Coordenada Y: "))
+z = float(input("Coordenada Z: "))
+
+fig = plt.figure()
+ax = fig.add_subplot(111, projection='3d')
+ax.quiver(0, 0, 0, x, y, z, color='b', arrow_length_ratio=0.1)
+
+ax.set_xlim([0, max(1, x)]), ax.set_ylim([0, max(1, y)]), ax.set_zlim([0, max(1, z)])
+ax.set_xlabel('X'), ax.set_ylabel('Y'), ax.set_zlabel('Z')
+plt.show()

@@ -1,0 +1,21 @@
+#Punto 1 Sección C
+print("----> Punto 1 Sección C")
+import matplotlib.pyplot as plt
+import numpy as np
+
+def rtd_pt100(t):
+    R0, A, B, C = 100, 3.9083e-3, -5.775e-7, -4.183e-12
+    # Aplicar fórmulas según el signo de T
+    return np.where(t >= 0, 
+                    R0 * (1 + A*t + B*t**2), 
+                    R0 * (1 + A*t + B*t**2 + C*(t-100)*t**3))
+
+temp = np.linspace(-200, 200, 500)
+resistencia = rtd_pt100(temp)
+
+plt.plot(temp, resistencia, 'r', linewidth=2)
+plt.title("Comportamiento RTD PT100")
+plt.xlabel("Temperatura (°C)")
+plt.ylabel("Resistencia (Ω)")
+plt.grid(True)
+plt.show()

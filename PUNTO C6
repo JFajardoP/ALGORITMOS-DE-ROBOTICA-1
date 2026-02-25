@@ -1,0 +1,46 @@
+#PUNTO 6 SECCION C
+import cv2
+import numpy as np
+import matplotlib.pyplot as plt
+
+print
+# Función para obtener contornos de una imagen
+def obtener_contorno(ruta_imagen):
+    img = cv2.imread(ruta_imagen, 0)
+    if img is None:
+        print(f"Error: No se encontró la imagen '{ruta_imagen}'.")
+        return None, None
+    # Detectar bordes con Canny
+    bordes = cv2.Canny(img, 100, 200)
+    # Obtener coordenadas de los puntos del borde
+    y, x = np.where(bordes > 0)
+    return x, -y  # Invertimos Y para la orientación correcta
+
+# --- Rutas de tus archivos ---
+# Se añade 'PUNTO C/' porque esa es la carpeta que contiene los logos
+ruta_h = 'PUNTO C/logo hyundai.jpg'
+ruta_c = 'PUNTO C/logochevrolet.jpg'
+
+# --- Procesamiento ---
+xh, yh = obtener_contorno(ruta_h)
+xc, yc = obtener_contorno(ruta_c)
+
+# --- Graficar ambos ---
+plt.figure(figsize=(12, 5))
+
+# Subplot para Hyundai
+if xh is not None:
+    plt.subplot(1, 2, 1)
+    plt.scatter(xh, yh, s=1, color='blue')
+    plt.title("Logo Hyundai")
+    plt.axis('equal')
+
+# Subplot para Chevrolet
+if xc is not None:
+    plt.subplot(1, 2, 2)
+    plt.scatter(xc, yc, s=1, color='gold')
+    plt.title("Logo Chevrolet")
+    plt.axis('equal')
+
+plt.tight_layout()
+plt.show()

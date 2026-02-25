@@ -1,0 +1,46 @@
+#PUNTO 4 SECCION C  
+import numpy as np
+import matplotlib.pyplot as plt
+from scipy import signal  # Librería fundamental para sistemas de control
+print("---PUNTO C4---")
+print("Formato: G(s) = C / (as^2 + bs + c)")
+a = float(input("Coeficiente a (s^2): "))
+b = float(input("Coeficiente b (s): "))
+c = float(input("Coeficiente c (constante): "))
+
+# 1. Cálculo de parámetros del sistema
+# Frecuencia natural: wn = sqrt(c/a)
+# Amortiguamiento: zeta = b / (2 * sqrt(a*c))
+wn = np.sqrt(c/a)
+zeta = b / (2 * np.sqrt(a * c))
+
+if zeta < 1:
+    tipo = "Subamortiguado"
+elif zeta == 1:
+    tipo = "Críticamente amortiguado"
+else:
+    tipo = "Sobreamortiguado"
+
+print(f"\nEl sistema es: {tipo}")
+print(f"Zeta (ζ): {zeta:.4f}")
+print(f"Frecuencia natural (ωn): {wn:.4f} rad/s")
+
+# 2. Creación del sistema y gráfica
+# Definimos la función de transferencia: Numerador [c] / Denominador [a, b, c]
+# Nota: Usamos 'c' en el numerador para que la ganancia final sea 1 (Estado estacionario)
+sys = signal.TransferFunction([c], [a, b, c])
+
+# Calculamos la respuesta al escalón (step)
+t, y = signal.step(sys)
+
+# 3. Estética de la gráfica
+plt.figure(figsize=(10, 6))
+plt.plot(t, y, 'b', linewidth=2, label=f'Respuesta {tipo}')
+plt.axhline(y=1, color='r', linestyle='--', label='Referencia (Escalón)')
+
+plt.title(f"Respuesta al Escalón - Sistema de 2do Orden\n(ζ = {zeta:.2f})", fontsize=12)
+plt.xlabel("Tiempo (segundos)")
+plt.ylabel("Amplitud")
+plt.grid(True, which='both', linestyle='--', alpha=0.7)
+plt.legend()
+plt.show()
