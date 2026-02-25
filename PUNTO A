@@ -1,0 +1,163 @@
+#Primer punto seccion A
+import numpy as np
+
+# Definir dos vectores
+vector1 = np.array([7, 8, 3])
+vector2 = np.array([4, 5, 6])
+
+# Método 1: np.dot
+resultado1 = np.dot(vector1, vector2    )  # (7*4) + (8*5) + (3*6) = 28 + 40 + 18 = 86
+print("-" * 30)
+print("Producto punto de los vectores:", resultado1)
+print("-" * 30)
+#Segundo punto seccion A
+# Definir dos vectores
+vector3 = np.array([7, 8, 10])
+vector4 = np.array([15, 5, 6])
+
+# Método 1: np.dot
+resultado2 = np.cross(vector3, vector4)
+print("Producto cruz de los vectores:", resultado2)
+print("-" * 30)
+
+#Punto 3 Sección A
+
+import math
+
+# Asignación de coordenadas fijas
+x, y, z = 4, 9, 10
+
+# 1. Cálculos para Coordenadas Cilíndricas (r, theta, z)
+r_cil = math.sqrt(x**2 + y**2)
+theta = math.atan2(y, x)  # El resultado es en radianes
+
+# 2. Cálculos para Coordenadas Esféricas (rho, theta, phi)
+rho = math.sqrt(x**2 + y**2 + z**2)
+# theta es el mismo que en cilíndricas
+phi = math.acos(z / rho) if rho != 0 else 0
+
+# Conversión selectiva a grados para visualización
+theta_deg = math.degrees(theta)
+phi_deg = math.degrees(phi)
+
+# Salida de resultados
+print(f"Coordenadas Rectangulares: ({x}, {y}, {z})")
+print("-" * 30)
+print(f"Cilíndricas: r = {r_cil:.4f}, θ = {theta_deg:.2f}°, z = {z}")
+print(f"Esféricas:   ρ = {rho:.4f}, θ = {theta_deg:.2f}°, φ = {phi_deg:.2f}°")
+print("-" * 30)
+
+#  Punto 4 Sección A
+
+def calcular_resistencia_pt100(t):
+    # Constantes de Callendar-Van Dusen (DIN/IEC 60751)
+    R0 = 100.0
+    A = 3.9083e-3
+    B = -5.775e-7
+    C = -4.183e-12
+
+    if t >= 0:
+        # Fórmula para temperaturas positivas
+        rt = R0 * (1 + A * t + B * t**2)
+    else:
+        # Fórmula para temperaturas negativas
+        rt = R0 * (1 + A * t + B * t**2 + C * (t - 100) * t**3)
+    
+    return rt
+
+# --- Configuración de valores fijos ---
+temperatura = 120.0  # Grados Celsius
+resistencia_resultante = calcular_resistencia_pt100(temperatura)
+
+# Salida de resultados
+print(f"--- Cálculo de Resistencia RTD PT100 ---")
+print(f"Temperatura: {temperatura} °C")
+print(f"Resistencia calculada:    {resistencia_resultante:.4f} Ω")
+print("-" * 30)
+
+# Punto 5 Sección A
+
+import math
+
+def rotacion_x(grados):
+    # Convertimos la entrada a radianes internamente
+    a = math.radians(grados)
+    
+    # Creamos la matriz usando las funciones de math
+    matriz = [
+        [1, 0, 0],
+        [0, math.cos(a), -math.sin(a)],
+        [0, math.sin(a), math.cos(a)]
+    ]
+    return matriz
+
+def rotacion_y(grados):
+    a = math.radians(grados)
+    matriz = [
+        [math.cos(a), 0, math.sin(a)],
+        [0, 1, 0],
+        [-math.sin(a), 0, math.cos(a)]
+    ]
+    return matriz
+
+def rotacion_z(grados):
+    a = math.radians(grados)
+    matriz = [
+        [math.cos(a), -math.sin(a), 0],
+        [math.sin(a), math.cos(a), 0],
+        [0, 0, 1]
+    ]
+    return matriz
+
+# --- Ejemplo de uso con parámetros fijos ---
+angulo_fijo = 90  # 90 grados
+
+m_x = rotacion_x(angulo_fijo)
+
+print(f"Matriz de rotación en X para {angulo_fijo}°:")
+# Formateamos la impresión para que sea legible
+for fila in m_x:
+    print(f"[{fila[0]:.2f}, {fila[1]:.2f}, {fila[2]:.2f}]")
+print("-" * 30)
+
+#Punto 6 Sección A
+import math
+
+def calcular_fuerzas_cilindro(presion_bar, diametro_embolo_mm, diametro_vasto_mm):
+    # 1. Conversión de unidades a Sistema Internacional (SI)
+    # Presión: 1 bar = 100,000 Pascales (N/m^2)
+    presion_pa = presion_bar * 100000
+    
+    # Dimensiones: mm a metros
+    d_embolo_m = diametro_embolo_mm / 1000
+    d_vasto_m = diametro_vasto_mm / 1000
+    
+    # 2. Cálculo de Áreas (m^2)
+    area_embolo = (math.pi * d_embolo_m**2) / 4
+    area_vastago = (math.pi * d_vasto_m**2) / 4
+    area_anular = area_embolo - area_vastago # Área efectiva para el retroceso
+    
+    # 3. Cálculo de Fuerzas (Newton)
+    fuerza_avance = presion_pa * area_embolo
+    fuerza_retroceso = presion_pa * area_anular
+    
+    return fuerza_avance, fuerza_retroceso
+
+# --- Parámetros fijos ---
+presion = 6.0          # bar
+diametro_e = 50.0      # mm (50mm de émbolo)
+diametro_v = 20.0      # mm (20mm de vástago)
+
+f_av, f_re = calcular_fuerzas_cilindro(presion, diametro_e, diametro_v)
+
+# Conversión a Kilogramos-fuerza para referencia común (1 kgf ≈ 9.81 N)
+kgf_av = f_av / 9.81
+kgf_re = f_re / 9.81
+
+# Mostrar resultados
+print(f"--- Datos del Cilindro ---")
+print(f"Presión: {presion} bar | Émbolo: {diametro_e}mm | Vástago: {diametro_v}mm")
+print("-" * 35)
+print(f"Fuerza de Avance:   {f_av:.2f} N ({kgf_av:.2f} kgf)")
+print(f"Fuerza de Retroceso: {f_re:.2f} N ({kgf_re:.2f} kgf)")
+print("-" * 30)
