@@ -11,13 +11,43 @@ print("-" * 30)
 print("Producto punto de los vectores:", resultado1)
 print("-" * 30)
 #Segundo punto seccion A
-# Definir dos vectores
-vector3 = np.array([7, 8, 10])
-vector4 = np.array([15, 5, 6])
+import numpy as np
 
-# Método 1: np.dot
-resultado2 = np.cross(vector3, vector4)
-print("Producto cruz de los vectores:", resultado2)
+#Matriz A
+A = np.array([[2, 1, 4], 
+              [5, 4, 7], 
+              [6, 7, 5]])
+#Matriz B
+B = np.array([[3, 7, 9], 
+              [1, 4, 1], 
+              [2, 5, 3]])
+
+print("Matriz A:\n", A)
+print("\nMatriz B:\n", B)
+print("-" * 30)
+
+# 2. Operaciones Matemáticas
+# Suma
+suma = A + B
+
+# Resta
+resta = A - B
+
+# Producto Punto 
+punto = np.dot(A, B)
+
+# Producto Cruz
+cruz = np.cross(A, B)
+
+# División 
+division = np.divide(A, B)
+
+# 3. Mostrar resultados
+print("Suma:\n", suma)
+print("\nResta:\n", resta)
+print("\nProducto Punto :\n", punto)
+print("\nProducto Cruz :\n", cruz)
+print("\nDivisión :\n", division)
 print("-" * 30)
 
 #Punto 3 Sección A
@@ -160,4 +190,5 @@ print(f"Presión: {presion} bar | Émbolo: {diametro_e}mm | Vástago: {diametro_
 print("-" * 35)
 print(f"Fuerza de Avance:   {f_av:.2f} N ({kgf_av:.2f} kgf)")
 print(f"Fuerza de Retroceso: {f_re:.2f} N ({kgf_re:.2f} kgf)")
+
 print("-" * 30)
